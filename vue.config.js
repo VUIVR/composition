@@ -4,5 +4,5 @@
 }) */
 
 module.exports = {
-  publicPath: '/compositionnpm /'
+  publicPath: '/composition/'
 }
