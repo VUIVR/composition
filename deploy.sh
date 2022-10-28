@@ -14,4 +14,4 @@ npm run build
 echo Deploying..
 git add -A
 git commit -m 'deploy'
-git push -f https://github.com/VUIVR/composition.git master
+git push -f https://github.com/VUIVR/composition.git gh-pages
