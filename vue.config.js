@@ -4,5 +4,5 @@
 }) */
 
 module.exports = {
-  publicPath: '/composition/'
-}
+  publicPath: process.env.NODE_ENV === 'production' ? '/composition/' : '/'
+ }
