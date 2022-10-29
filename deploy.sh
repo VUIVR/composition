@@ -1,24 +1,17 @@
-#!/usr/bin/env sh
-
-# остановить публикацию при ошибках
+# abort on errors
 set -e
 
-# сборка
+# build
+echo Linting..
 npm run build
 
-# переход в каталог сборки
-cd dist
+# if you are deploying to a custom domain add a CNAME (uncomment the next 3 lines)
+#cd docs
+#echo 'yourcustomdomain.com' > CNAME
+#cd -
 
-
-
-git init
+# deploy
+echo Deploying..
 git add -A
 git commit -m 'deploy'
-
-# если вы публикуете по адресу https://<USERNAME>.github.io
-# git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git master
-
-# если вы публикуете по адресу https://<USERNAME>.github.io/<REPO>
-git push -f git@github.com:VUIVR/composition.git master:gh-pages
-
-cd -
+git push -f https://github.com/VUIVR/composition.git gh-pages

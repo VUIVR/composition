@@ -1,6 +1,6 @@
 <template>
     <header className='header'>
-        <Burger @click='viewMenu' />
+        <Burger @click='showMenu' @keyup.esc='closeMenu' tabindex="0"/>
         <div className='header__logo'>
             <img src='../assets/logo.png' alt='logo'>
             <span>Butterfly</span>
@@ -16,7 +16,8 @@
 
     const store = useStore()
 
-    function viewMenu () { store.dispatch('viewMenu') }
+    function showMenu () { store.dispatch('viewMenu', true) }
+    function closeMenu () { store.dispatch('viewMenu', false) }
 
 </script>
 

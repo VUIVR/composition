@@ -1,5 +1,5 @@
 <template>
-    <div class='burger-btn'></div>
+    <button class='burger-btn' ></button>
 </template>
 
 <script>
@@ -20,7 +20,6 @@ export default {
         border: 1px $text-color-header solid;
         border-radius: 5px;
         transition: box-shadow 0.2s ease-in;
-
 
         &:hover {
             transition: box-shadow 0.2s ease-in;
