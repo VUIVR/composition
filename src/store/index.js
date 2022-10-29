@@ -8,13 +8,13 @@ export default createStore({
     getViewMenu: state => state.viewMenu
   },
   mutations: {
-    viewMenu (state) {
-      state.viewMenu = !state.viewMenu
+    viewMenu (state, payload) {
+      state.viewMenu = payload
     }
   },
   actions: {
-    viewMenu ({commit}) {
-      commit("viewMenu")
+    viewMenu ({commit}, payload) {
+      commit("viewMenu", payload)
     }
   },
   modules: {

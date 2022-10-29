@@ -1,9 +1,15 @@
 <template>
 <transition name='slide-fade'>
-  <aside className='sidebar' v-if='flagViewMenu' @click.self='viewMenu'>
+  <aside
+    className='sidebar'
+    v-if='flagViewMenu'
+    @click.self='closeMenu'
+
+    tabindex="0"
+  >
     <div class='sidebar__menu'>
 
-      <div className='sidebar__btn-close' @click.prevent='viewMenu'></div>
+      <div className='sidebar__btn-close' @click.prevent='closeMenu'></div>
       <h2 className='sidebar__header'>Menu</h2>
 
       <nav className='sidebar__nav'>
@@ -12,7 +18,7 @@
             v-for="item in menuList"
             :key="item.name"
             :to='item.to'
-            @click="viewMenu"
+            @click="closeMenu"
           >
             <li className='sidebar__menu-item'>
               {{item.name}}
@@ -32,7 +38,8 @@
   const store = useStore()
   let flagViewMenu = computed(() => store.getters.getViewMenu)
 
-  function viewMenu () { store.dispatch('viewMenu') }
+  function showMenu () { store.dispatch('viewMenu', true) }
+  function closeMenu () { store.dispatch('viewMenu', false) }
 
   const menuList = [
     {
