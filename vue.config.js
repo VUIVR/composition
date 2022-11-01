@@ -6,6 +6,7 @@ module.exports = defineConfig({
 /* module.exports = {
   publicPath: process.env.NODE_ENV === 'production' ? '/composition/' : '/'
 } */
-module.exports = {
+/* module.exports = {
   publicPath: 'composition/'
 }
+ */
