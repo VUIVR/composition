@@ -3,6 +3,9 @@ module.exports = defineConfig({
   transpileDependencies: true
 })
 
-module.exports = {
+/* module.exports = {
   publicPath: process.env.NODE_ENV === 'production' ? '/composition/' : '/'
- }
+} */
+module.exports = {
+  publicPath: '/'
+}
