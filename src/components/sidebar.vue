@@ -31,7 +31,7 @@
 
 <script setup>
   import { useStore } from 'vuex'
-  import { ref, computed, watch } from 'vue'
+  import { computed, watch } from 'vue'
 
   const store = useStore()
   let flagViewMenu = computed(() => store.getters.getViewMenu)

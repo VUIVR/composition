@@ -2,7 +2,9 @@
   <transition name="modal">
     <article className='card'>
         <h2 className='card__header'> Card №{{ props.info.id }} </h2>
-        <img :src='props.info.url' alt='img' className='card__img'>
+        <div className='card__img'>
+          <img :src='props.info.url' alt='img'>
+        </div>
         <div className='card__desc'> {{ props.info.title }} {{ props.info.title }} {{ props.info.title }}</div>
     </article>
   </transition>
@@ -23,8 +25,13 @@
     margin: 0 15px 15px 0;
 
     &__img {
-        width: inherit;
+        width: 300px;
         height: 200px;
+
+        img {
+          width: inherit;
+          height: inherit;
+        }
     }
 
     &__desc {

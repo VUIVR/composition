@@ -1,31 +1,31 @@
 <template>
   <transition name="modal">
-    <div class='modal' v-if='props.flag' @click.self='closeModal' @keyup.esc="closeModal">
+    <div class='modal' v-if='flag' @click.self='closeModal'>
         <div class='modal__window'>
-            <h3 className='modal__header'>Create new item</h3>
+            <h3 className='modal__header'> Create new item </h3>
             <form class='modal__form'>
                 <div>
                     <div className='modal__title' for='name'> Name: </div>
-                    <input className='modal__input' id='name' name='name' type='text' autofocus>
+                    <input className='modal__input' id='name' name='name' type='text'>
                 </div>
                 <div>
                     <label className='upload'>
-                        <span class='upload__file-name' type='text'></span>
-                        <input type='file' name='file'>
-                        <span class='upload__btn'>Choose file</span>
+                        <span class='upload__file-name' type='text'>{{ fileName }}</span>
+                        <input type='file' name='file' @change="upload">
+                        <span class='upload__btn'> Choose file </span>
                     </label>
                 </div>
                 <div>
                     <div className='modal__title' for='desc'> Description </div>
-                    <textarea className='modal__input' id='desc' name='description' rows='3'>Text area</textarea>
+                    <textarea className='modal__input' id='desc' name='description' rows="3"> Text area </textarea>
                 </div>
                 <div className='chekbox'>
                     <input className='chekbox__input' type='checkbox' name='check' id='checkbox'>
-                    <label className='chekbox__label' for='checkbox'>Show </label>
+                    <label className='chekbox__label' for='checkbox'> Show </label>
                 </div>
                 <div class='modal__btn-block'>
-                    <button class='modal__btn modal__btn_disable' @click.prevent=''>OK</button>
-                    <button class='modal__btn' @click.prevent='closeModal' @keydown.esc="closeModal">Cancel</button>
+                    <button class='modal__btn modal__btn_disable' @click.prevent=''> OK </button>
+                    <button class='modal__btn' @click.prevent='closeModal'> Cancel </button>
                 </div>
             </form>
         </div>
@@ -34,13 +34,30 @@
 </template>
 
 <script setup>
+    import { watch, toRefs, ref, onUnmounted } from 'vue'
+
     const props = defineProps({
         flag: Boolean
     })
+    const { flag } = toRefs(props)
+
+    watch(flag, (newValue, oldValue) => {
+        if(newValue) {
+            document.body.classList.add('body_fixed')
+            window.addEventListener('keydown', closeModalEsc)
+        } else {
+            document.body.classList.remove('body_fixed')
+            window.removeEventListener('keydown', closeModalEsc)
+            fileName.value = ''
+        }
+    })
 
     const emit = defineEmits(['closeModal'])
-    function closeModal () { emit('closeModal')}
+    function closeModal () { emit('closeModal') }
+    function closeModalEsc (e) { e.key === 'Escape' && emit('closeModal') }
 
+    const fileName = ref('')
+    function upload (e) { fileName.value = e.target.files[0].name }
 </script>
 
 <style lang='scss'>
@@ -85,11 +102,17 @@
             gap: 15px
         }
 
+        &__textaria-container {
+            width: 100%;
+            height: 100px;
+        }
+
         &__input {
             outline: none;
             padding: 10px 5px;
             border: 1px solid $main-blue;
             width: 100%;
+            resize: none;
         }
 
         &__title {
