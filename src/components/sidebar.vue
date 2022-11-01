@@ -4,8 +4,6 @@
     className='sidebar'
     v-if='flagViewMenu'
     @click.self='closeMenu'
-
-    tabindex="0"
   >
     <div class='sidebar__menu'>
 
@@ -33,13 +31,24 @@
 
 <script setup>
   import { useStore } from 'vuex'
-  import { computed } from 'vue'
+  import { ref, computed, watch } from 'vue'
 
   const store = useStore()
   let flagViewMenu = computed(() => store.getters.getViewMenu)
 
-  function showMenu () { store.dispatch('viewMenu', true) }
-  function closeMenu () { store.dispatch('viewMenu', false) }
+  function closeMenu (e) {
+    (e.key === "Escape" || e.type === "click") && store.dispatch('viewMenu', false)
+  }
+
+  watch(flagViewMenu, (newValue, oldValue) => {
+    if (newValue) {
+      document.body.classList.add("body_fixed")
+      window.addEventListener('keydown', closeMenu)
+    } else {
+      document.body.classList.remove("body_fixed")
+      window.removeEventListener('keydown', closeMenu)
+    }
+  })
 
   const menuList = [
     {

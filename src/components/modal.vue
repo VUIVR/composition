@@ -1,12 +1,12 @@
 <template>
   <transition name="modal">
-    <div class='modal' v-if='props.flag' @click.self='closeModal'>
+    <div class='modal' v-if='props.flag' @click.self='closeModal' @keyup.esc="closeModal">
         <div class='modal__window'>
             <h3 className='modal__header'>Create new item</h3>
             <form class='modal__form'>
                 <div>
                     <div className='modal__title' for='name'> Name: </div>
-                    <input className='modal__input' id='name' name='name' type='text'>
+                    <input className='modal__input' id='name' name='name' type='text' autofocus>
                 </div>
                 <div>
                     <label className='upload'>
@@ -25,7 +25,7 @@
                 </div>
                 <div class='modal__btn-block'>
                     <button class='modal__btn modal__btn_disable' @click.prevent=''>OK</button>
-                    <button class='modal__btn' @click.prevent='closeModal'>Cancel</button>
+                    <button class='modal__btn' @click.prevent='closeModal' @keydown.esc="closeModal">Cancel</button>
                 </div>
             </form>
         </div>
@@ -39,14 +39,14 @@
     })
 
     const emit = defineEmits(['closeModal'])
-    function closeModal () { emit('closeModal') }
+    function closeModal () { emit('closeModal')}
 
 </script>
 
 <style lang='scss'>
-  @import '../assets/style/_colors.scss';
-  @import '../assets/style/_mixins.scss';
-  @import '../assets/style/_transitions.scss';
+    @import '../assets/style/_colors.scss';
+    @import '../assets/style/_mixins.scss';
+    @import '../assets/style/_transitions.scss';
 
     .modal {
         position: fixed;
@@ -60,6 +60,7 @@
         align-items: center;
         color: $main-blue;
         text-align: left;
+        overflow: auto;
 
         &__window {
             width: 300px;

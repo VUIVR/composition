@@ -29,3 +29,9 @@
   body {
     min-width: 320px;
   }
+
+  .body {
+    &_fixed {
+      overflow: hidden;
+    }
+  }

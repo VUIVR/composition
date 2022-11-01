@@ -1,10 +1,10 @@
 <template>
   <div class='main'>
     <section>
-      <button class='main__btn' @click='viewModal' >Add Item</button>
+      <button class='main__btn' @click='openModal'>Add Item</button>
     </section>
     <CardList v-if="route.fullPath === '/content'" />
-    <Modal :flag='flagViewModal' @closeModal='viewModal' />
+    <Modal :flag='flagViewModal' @closeModal='closeModal' />
   </div>
 </template>
 
@@ -17,9 +17,8 @@
   const route = useRoute()
 
   let flagViewModal = ref(false)
-  function viewModal () {
-    flagViewModal.value = !flagViewModal.value
-  }
+  function openModal (flag) { flagViewModal.value = true }
+  function closeModal () { flagViewModal.value = false }
 </script>
 
 <style lang='scss'>
